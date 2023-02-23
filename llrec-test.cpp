@@ -45,6 +45,8 @@ Node* readList(const char* filename)
 
 void print(Node* head)
 {
+    if(head == NULL) cout<<"NULL";
+
     while(head) {
         cout << head->val << " ";
         head = head->next;
@@ -67,7 +69,12 @@ void dealloc(Node* head)
 //   function object struct declarations
 // -----------------------------------------------
 
-
+struct isOdd
+{
+	bool operator()(int i) {
+		return i%2!= 0;
+	}
+};
 
 
 
@@ -84,12 +91,23 @@ int main(int argc, char* argv[])
     Node* head = readList(argv[1]);
     cout << "Original list: ";
     print(head);
-
-    // Test out your linked list code
-
-
-
     
+    // Test out your linked list code
+    Node* small;
+    Node* large;
+		Node* mt = NULL;
+    int i =8;
+    llpivot(head, small, large, i);
+    
+    cout << "Original list: ";
+    print(head);
+    cout << "Small list: ";
+    print(small);
+    cout << "Large list: ";
+    print(large);
+		cout << "Filtered large list: ";
+    print(llfilter(large, isOdd()));
+
     return 0;
 
 }

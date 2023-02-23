@@ -80,9 +80,17 @@ Node* llfilter(Node* head, Comp pred);
 template <typename Comp>
 Node* llfilter(Node* head, Comp pred)
 {
+	if(head == NULL) return head;
     //*********************************************
     // Provide your implementation below
     //*********************************************
+
+    if(pred(head->val)) return llfilter(head->next, pred);
+		else 
+		{
+			head->next = llfilter(head->next, pred);
+			return head;
+		}
 
 
 }
